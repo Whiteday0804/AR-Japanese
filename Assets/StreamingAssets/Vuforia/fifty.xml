@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="n" size="0.088000 0.087124" />
+    <ImageTarget name="wo" size="0.088000 0.088707" />
+    <ImageTarget name="wa" size="0.088000 0.088530" />
+    <ImageTarget name="ro" size="0.088000 0.087649" />
+    <ImageTarget name="re" size="0.088000 0.088177" />
+    <ImageTarget name="ru" size="0.088000 0.087472" />
+    <ImageTarget name="ri" size="0.088000 0.087120" />
+    <ImageTarget name="ra" size="0.088000 0.088000" />
+    <ImageTarget name="yo" size="0.088000 0.087475" />
+    <ImageTarget name="yu" size="0.088000 0.088000" />
+    <ImageTarget name="ya" size="0.088000 0.087472" />
+    <ImageTarget name="mo" size="0.088000 0.088177" />
+    <ImageTarget name="me" size="0.088000 0.087825" />
+    <ImageTarget name="mu" size="0.088000 0.088351" />
+    <ImageTarget name="mi" size="0.088000 0.088000" />
+    <ImageTarget name="ma" size="0.088000 0.086438" />
+    <ImageTarget name="ho" size="0.088000 0.088353" />
+    <ImageTarget name="he" size="0.088000 0.087825" />
+    <ImageTarget name="hu" size="0.088000 0.088000" />
+    <ImageTarget name="hi" size="0.088000 0.088701" />
+    <ImageTarget name="ha" size="0.088000 0.085950" />
+    <ImageTarget name="no" size="0.088000 0.087473" />
+    <ImageTarget name="ne" size="0.088000 0.086438" />
+    <ImageTarget name="nu" size="0.088000 0.088000" />
+    <ImageTarget name="ni" size="0.088000 0.087304" />
+    <ImageTarget name="na" size="0.088000 0.086950" />
+    <ImageTarget name="to" size="0.088000 0.086261" />
+    <ImageTarget name="tsu" size="0.088000 0.088696" />
+    <ImageTarget name="chi" size="0.088000 0.088525" />
+    <ImageTarget name="ta" size="0.088000 0.087478" />
+    <ImageTarget name="so" size="0.088000 0.088000" />
+    <ImageTarget name="se" size="0.088000 0.088526" />
+    <ImageTarget name="su" size="0.088000 0.086609" />
+    <ImageTarget name="si" size="0.088000 0.086946" />
+    <ImageTarget name="sa" size="0.088000 0.087825" />
+    <ImageTarget name="ko" size="0.088000 0.087475" />
+    <ImageTarget name="ke" size="0.088000 0.087651" />
+    <ImageTarget name="ku" size="0.088000 0.087137" />
+    <ImageTarget name="ki" size="0.088000 0.086969" />
+    <ImageTarget name="ka" size="0.088000 0.086264" />
+    <ImageTarget name="o" size="0.088000 0.087824" />
+    <ImageTarget name="e" size="0.088000 0.087825" />
+    <ImageTarget name="u" size="0.088000 0.086780" />
+    <ImageTarget name="i" size="0.088000 0.087650" />
+    <ImageTarget name="a" size="0.088000 0.087299" />
+    <ImageTarget name="te" size="0.088000 0.086609" />
+  </Tracking>
+</QCARConfig>
