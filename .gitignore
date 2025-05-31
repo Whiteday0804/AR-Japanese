@@ -70,4 +70,11 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# 忽略 Vuforia 相關檔案
+/Vuforia/
+# 忽略 Vuforia 的配置檔案
+/VuforiaEngine/
+# 忽略 Vuforia 的快取檔案
+/VuforiaSDK/
 Packages/com.ptc.vuforia.engine-11.0.4.tgz
