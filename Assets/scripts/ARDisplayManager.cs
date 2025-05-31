@@ -20,7 +20,7 @@ public class ARDisplayManager : MonoBehaviour
         if (behaviour != null && behaviour.transform.childCount > 0)
         {
             GameObject arContent = behaviour.transform.GetChild(0).gameObject;
-            arContent.SetActive(isTracked && AppStateManager.CurrentState == AppState.tutorial);
+            arContent.SetActive(isTracked && AppStateManager.CurrentState == AppState.Tutorial);
         }
     }
 }

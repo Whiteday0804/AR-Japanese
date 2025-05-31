@@ -1,9 +1,9 @@
 public enum AppState
 {
     Home,
-    tutorial,
-    questions,
-    voice
+    Tutorial,
+    Questions,
+    Voice
 }
 
 public static class AppStateManager {

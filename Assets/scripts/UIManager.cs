@@ -22,14 +22,16 @@ public class UIManager : MonoBehaviour
         tutorialPanel.SetActive(false);
         questionPanel.SetActive(false);
         voicePanel.SetActive(false);
+        AppStateManager.CurrentState = AppState.Home;
     }
-    
+
     public void ShowTutorialPanel()
     {
         homePanel.SetActive(false);
         tutorialPanel.SetActive(true);
         questionPanel.SetActive(false);
         voicePanel.SetActive(false);
+        AppStateManager.CurrentState = AppState.Tutorial;
     }
 
     public void ShowQuestionPanel()
@@ -38,6 +40,7 @@ public class UIManager : MonoBehaviour
         tutorialPanel.SetActive(false);
         questionPanel.SetActive(true);
         voicePanel.SetActive(false);
+        AppStateManager.CurrentState = AppState.Questions;
     }
 
     public void ShowVoicePanel()
@@ -46,5 +49,6 @@ public class UIManager : MonoBehaviour
         tutorialPanel.SetActive(false);
         questionPanel.SetActive(false);
         voicePanel.SetActive(true);
+        AppStateManager.CurrentState = AppState.Voice;
     }
 }
