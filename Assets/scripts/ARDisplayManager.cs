@@ -4,6 +4,7 @@ using Vuforia;
 
 public class ARDisplayManager : MonoBehaviour
 {
+    public QuestionManager questionManager;
     private void Start()
     {
         ImageTargetBehaviour[] imageTargets = FindObjectsOfType<ImageTargetBehaviour>();
@@ -21,6 +22,14 @@ public class ARDisplayManager : MonoBehaviour
         {
             GameObject arContent = behaviour.transform.GetChild(0).gameObject;
             arContent.SetActive(isTracked && AppStateManager.CurrentState == AppState.Tutorial);
+        }
+
+        // ✅ 新增：當圖卡開始追蹤到時，通知 GameManager
+        if (isTracked && AppStateManager.CurrentState == AppState.Questions)
+        {
+            string detectedName = behaviour.TargetName;
+            Debug.Log($"偵測到圖卡：{detectedName}");
+            questionManager.OnCardDetected(detectedName);
         }
     }
 }
