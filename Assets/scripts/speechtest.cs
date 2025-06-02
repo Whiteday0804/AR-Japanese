@@ -4,7 +4,7 @@ using System;
 using System.Text;
 using System.Collections;
 
-public class SpeechRecognizer : MonoBehaviour
+public class speechtest : MonoBehaviour
 {
 
     private string apiKey = APIKeyLoader.GetAPIKey(); 

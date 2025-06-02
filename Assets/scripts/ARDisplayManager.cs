@@ -5,6 +5,7 @@ using Vuforia;
 public class ARDisplayManager : MonoBehaviour
 {
     public QuestionManager questionManager;
+
     private void Start()
     {
         ImageTargetBehaviour[] imageTargets = FindObjectsOfType<ImageTargetBehaviour>();
@@ -18,18 +19,73 @@ public class ARDisplayManager : MonoBehaviour
     {
         bool isTracked = status.Status == Status.TRACKED || status.Status == Status.EXTENDED_TRACKED;
 
-        if (behaviour != null && behaviour.transform.childCount > 0)
+        if (behaviour == null) return;
+
+        Transform canvas = null;
+        foreach (Transform child in behaviour.transform)
         {
-            GameObject arContent = behaviour.transform.GetChild(0).gameObject;
-            arContent.SetActive(isTracked && AppStateManager.CurrentState == AppState.Tutorial);
+            if (child.name.StartsWith("canva_"))
+            {
+                canvas = child;
+                break;
+            }
+        }
+        if (canvas == null)
+        {
+            Debug.LogWarning($"找不到 canvas_* 物件 in {behaviour.name}");
+            return;
+        }
+        // 全部子元件先關掉
+        foreach (Transform child in canvas)
+        {
+            child.gameObject.SetActive(false);
+        }
+        if (isTracked)
+        {
+            switch (AppStateManager.CurrentState)
+            {
+                case AppState.Tutorial:
+                    ShowChildIfExists(canvas, "sound");
+                    ShowChildIfExists(canvas, "word");
+                    ShowChildIfExists(canvas, "panel_word");
+                    break;
+                case AppState.Questions:
+                    string detectedName = behaviour.TargetName;
+                    Debug.Log($"偵測到圖卡：{detectedName}");
+                    questionManager.OnCardDetected(detectedName);
+                    break;
+                case AppState.Voice:
+                    ShowChildIfExists(canvas, "voice");
+                    break;
+
+                default:
+                    // 其他狀態不顯示
+                    break;
+            }
         }
 
         // ✅ 新增：當圖卡開始追蹤到時，通知 GameManager
-        if (isTracked && AppStateManager.CurrentState == AppState.Questions)
+        // if (isTracked && AppStateManager.CurrentState == AppState.Questions)
+        // {
+        //     string detectedName = behaviour.TargetName;
+        //     Debug.Log($"偵測到圖卡：{detectedName}");
+        //     questionManager.OnCardDetected(detectedName);
+        // }
+        // 找到 canvas
+        
+
+
+    }
+     void ShowChildIfExists(Transform parent, string childName)
+    {
+        var child = parent.Find(childName);
+        if (child != null)
         {
-            string detectedName = behaviour.TargetName;
-            Debug.Log($"偵測到圖卡：{detectedName}");
-            questionManager.OnCardDetected(detectedName);
+            child.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning($"找不到子物件 {childName} in {parent.name}");
         }
     }
 }
