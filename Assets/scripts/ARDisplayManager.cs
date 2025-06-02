@@ -5,7 +5,7 @@ using Vuforia;
 public class ARDisplayManager : MonoBehaviour
 {
     public QuestionManager questionManager;
-
+    public static string currentCard;
     private void Start()
     {
         ImageTargetBehaviour[] imageTargets = FindObjectsOfType<ImageTargetBehaviour>();
@@ -42,6 +42,7 @@ public class ARDisplayManager : MonoBehaviour
         }
         if (isTracked)
         {
+            
             switch (AppStateManager.CurrentState)
             {
                 case AppState.Tutorial:
@@ -55,7 +56,11 @@ public class ARDisplayManager : MonoBehaviour
                     questionManager.OnCardDetected(detectedName);
                     break;
                 case AppState.Voice:
+                    string targetName = behaviour.TargetName;
+                    currentCard = targetName;
+                    Debug.Log($"完整 target name: {currentCard}");
                     ShowChildIfExists(canvas, "voice");
+                    ShowChildIfExists(canvas, "panel_word");
                     break;
 
                 default:
