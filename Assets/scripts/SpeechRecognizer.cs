@@ -13,6 +13,7 @@ public class SpeechRecognizer : MonoBehaviour
     private bool isRecording = false;
     public GameObject correctIcon;  
     public GameObject wrongIcon; 
+    public Button recordingStatus;
 
     public Dictionary<string, string> imageToKana = new Dictionary<string, string>()
     {
@@ -23,7 +24,7 @@ public class SpeechRecognizer : MonoBehaviour
         { "na", "な 夏" },{ "ni", "に 日 本" },{ "nu", "ぬ 布" },{ "ne", "ね 猫" },{ "no", "の 飲 み 物" },
         { "ha", "は 花 ハ" },{ "hi", "ひ 火" },{ "hu", "ふ 船" },{ "he", "へ 部 屋" },{ "ho", "ほ 星" },
         { "ma", "ま 窓 マ" },{ "mi", "み 水" },{ "mu", "む 虫 ム" },{ "me", "め 目" },{ "mo", "も 森 モ" },
-        { "ra", "ら 蘭" },{ "ri", "り 林 檎" },{ "ru", "る 留 守 番" },{ "re", "れ 冷 蔵 庫" },{ "ro", "ろ 廊 下" },
+        { "ra", "ら 蘭" },{ "ri", "り 林 檎" },{ "ru", "る 留 守 番" },{ "re", "れ 冷 蔵 庫" },{ "ro", "ろ 廊 下 老" },
         { "ya", "や 山" },{ "yu", "ゆ 雪" },{ "yo", "よ 夜" },
         { "wa", "わ 私" },{ "wo", "を" },{ "n", "ん 本 ほ ん" }
 
@@ -51,6 +52,9 @@ public class SpeechRecognizer : MonoBehaviour
             return;
         }
         Debug.Log("開始錄音（5秒）...");
+       
+        recordingStatus.gameObject.SetActive(true);
+        
         string mic = Microphone.devices[0];
         clip = Microphone.Start(mic, false, 5, sampleRate);
         isRecording = true;
@@ -62,6 +66,7 @@ public class SpeechRecognizer : MonoBehaviour
         yield return new WaitForSeconds(5f);
         Microphone.End(null);
         isRecording = false;
+        recordingStatus.gameObject.SetActive(false);
         Debug.Log("錄音結束，開始辨識");
         StartCoroutine(ProcessAudio());
     }
