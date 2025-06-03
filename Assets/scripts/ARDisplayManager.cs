@@ -49,6 +49,7 @@ public class ARDisplayManager : MonoBehaviour
                     ShowChildIfExists(canvas, "sound");
                     ShowChildIfExists(canvas, "word");
                     ShowChildIfExists(canvas, "panel_word");
+                    questionManager.HideAllEffects();
                     break;
                 case AppState.Questions:
                     string detectedName = behaviour.TargetName;
@@ -61,6 +62,7 @@ public class ARDisplayManager : MonoBehaviour
                     Debug.Log($"完整 target name: {currentCard}");
                     ShowChildIfExists(canvas, "voice");
                     ShowChildIfExists(canvas, "panel_word");
+                    questionManager.HideAllEffects();
                     break;
 
                 default:
@@ -76,7 +78,6 @@ public class ARDisplayManager : MonoBehaviour
         //     Debug.Log($"偵測到圖卡：{detectedName}");
         //     questionManager.OnCardDetected(detectedName);
         // }
-        // 找到 canvas
         
 
 

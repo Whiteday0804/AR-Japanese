@@ -11,7 +11,6 @@ public class QuestionManager : MonoBehaviour
     [Header("UI")]
     public Button playSoundButton;
     public Button nextQuestionButton;
-    public Text resultText;
     public Text comboText;
     public Text bestComboText;
 
@@ -25,7 +24,6 @@ public class QuestionManager : MonoBehaviour
 
     void Start()
     {
-        resultText.text = "";
         comboText.text = "目前連答紀錄: 0";
         bestCombo = PlayerPrefs.GetInt("BestCombo", 0);
         bestComboText.text = "最高連答紀錄: " + bestCombo;
@@ -47,43 +45,47 @@ public class QuestionManager : MonoBehaviour
             audioSource.Play();
 
             hasAnswered = false;
-            resultText.text = "";
             playSoundButton.interactable = true;
             nextQuestionButton.interactable = true;
             isFirstPlay = false;
         }
         else
         {
-
             audioSource.Play();
-
             hasAnswered = false;
-            resultText.text = "";
             playSoundButton.interactable = true;
             nextQuestionButton.interactable = true;
         }
+
+        HideAllEffects(); // 新增：清除所有特效
     }
 
     public void OnCardDetected(string detectedName)
     {
         if (hasAnswered) return;
 
-        if (detectedName == currentTargetName)
+        bool isCorrect = (detectedName == currentTargetName);
+        string cardObjectName = "card_" + detectedName;
+
+        if (isCorrect)
         {
-            resultText.text = "正確！";
             comboCount++;
             playSoundButton.interactable = false;
+
             if (comboCount > bestCombo)
             {
                 bestCombo = comboCount;
                 PlayerPrefs.SetInt("BestCombo", bestCombo);
             }
+
+            ShowCorrectEffect(cardObjectName); // 新增
         }
         else
         {
-            resultText.text = "錯誤！";
             comboCount = 0;
             playSoundButton.interactable = false;
+
+            ShowWrongEffect(cardObjectName);
         }
 
         comboText.text = "目前連答紀錄: " + comboCount;
@@ -94,8 +96,60 @@ public class QuestionManager : MonoBehaviour
     private void NextQuestion()
     {
         isFirstPlay = true;
-        resultText.text = "";
         playSoundButton.interactable = true;
         nextQuestionButton.interactable = false;
+    }
+
+    private void ShowWrongEffect(string cardName)
+    {
+        GameObject card = GameObject.Find(cardName);
+        if (card != null)
+        {
+            Transform wrongEffect = card.transform.Find("WrongEffectCanvas");
+            if (wrongEffect != null)
+            {
+                HideAllEffects();
+                wrongEffect.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void ShowCorrectEffect(string cardName)
+    {
+        GameObject card = GameObject.Find(cardName);
+        if (card != null)
+        {
+            Transform correctCanvas = card.transform.Find("CorrectEffectCanvas");
+            if (correctCanvas != null)
+                HideAllEffects();
+                correctCanvas.gameObject.SetActive(true);
+
+            Transform goldParticle = card.transform.Find("GoldParticle");
+            if (goldParticle != null)
+            {
+                var particle = goldParticle.GetComponent<ParticleSystem>();
+                if (particle != null)
+                    particle.Play();
+            }
+        }
+    }
+
+    public void HideAllEffects()
+    {
+        foreach (var card in GameObject.FindGameObjectsWithTag("ImageTarget"))
+        {
+            var wrong = card.transform.Find("WrongEffectCanvas");
+            if (wrong != null) wrong.gameObject.SetActive(false);
+
+            var correct = card.transform.Find("CorrectEffectCanvas");
+            if (correct != null) correct.gameObject.SetActive(false);
+
+            var gold = card.transform.Find("GoldParticle");
+            if (gold != null)
+            {
+                var particle = gold.GetComponent<ParticleSystem>();
+                if (particle != null) particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            }
+        }
     }
 }
