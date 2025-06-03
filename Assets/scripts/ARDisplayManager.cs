@@ -4,6 +4,8 @@ using Vuforia;
 
 public class ARDisplayManager : MonoBehaviour
 {
+    public AudioSource bgmSource;
+    public AudioClip bgmClip;
     public QuestionManager questionManager;
     public static string currentCard;
     private void Start()
@@ -45,18 +47,27 @@ public class ARDisplayManager : MonoBehaviour
             
             switch (AppStateManager.CurrentState)
             {
+                case AppState.Home:
+                    bgmSource.clip = bgmClip;
+                    bgmSource.volume = 0.5f;
+                    bgmSource.loop = true;
+                    bgmSource.Play();
+                    break;
                 case AppState.Tutorial:
+                    bgmSource.Pause();
                     ShowChildIfExists(canvas, "sound");
                     ShowChildIfExists(canvas, "word");
                     ShowChildIfExists(canvas, "panel_word");
                     questionManager.HideAllEffects();
                     break;
                 case AppState.Questions:
+                    bgmSource.Pause();
                     string detectedName = behaviour.TargetName;
                     Debug.Log($"偵測到圖卡：{detectedName}");
                     questionManager.OnCardDetected(detectedName);
                     break;
                 case AppState.Voice:
+                    bgmSource.Pause();
                     string targetName = behaviour.TargetName;
                     currentCard = targetName;
                     Debug.Log($"完整 target name: {currentCard}");

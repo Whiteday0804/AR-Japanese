@@ -4,9 +4,12 @@ using UnityEngine.UI;
 
 public class QuestionManager : MonoBehaviour
 {
-    [Header("音檔")]
+    [Header("資源")]
     public List<AudioClip> fiftySounds;
+    public AudioClip correctSound;
+    public AudioClip wrongSound;
     public AudioSource audioSource;
+    public AudioSource sfxAudioSource;
 
     [Header("UI")]
     public Button playSoundButton;
@@ -71,6 +74,7 @@ public class QuestionManager : MonoBehaviour
         {
             comboCount++;
             playSoundButton.interactable = false;
+            nextQuestionButton.interactable = true;
 
             if (comboCount > bestCombo)
             {
@@ -84,6 +88,7 @@ public class QuestionManager : MonoBehaviour
         {
             comboCount = 0;
             playSoundButton.interactable = false;
+            nextQuestionButton.interactable = true;
 
             ShowWrongEffect(cardObjectName);
         }
@@ -111,6 +116,10 @@ public class QuestionManager : MonoBehaviour
                 HideAllEffects();
                 wrongEffect.gameObject.SetActive(true);
             }
+            if (sfxAudioSource != null && wrongSound != null)
+            {
+                sfxAudioSource.PlayOneShot(wrongSound);
+            }
         }
     }
 
@@ -123,6 +132,10 @@ public class QuestionManager : MonoBehaviour
             if (correctCanvas != null)
                 HideAllEffects();
                 correctCanvas.gameObject.SetActive(true);
+            if (sfxAudioSource != null && correctSound != null)
+            {
+                sfxAudioSource.PlayOneShot(correctSound);
+            }
 
             Transform goldParticle = card.transform.Find("GoldParticle");
             if (goldParticle != null)
