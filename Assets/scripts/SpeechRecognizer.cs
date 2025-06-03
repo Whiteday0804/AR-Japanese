@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class SpeechRecognizer : MonoBehaviour
 {
 
-    private string apiKey = APIKeyLoader.GetAPIKey();
+    private string apiKey;
     private AudioClip clip;
     private const int sampleRate = 16000;
     private bool isRecording = false;
@@ -31,6 +31,8 @@ public class SpeechRecognizer : MonoBehaviour
 
     void Start()
     {
+        apiKey = APIKeyLoader.GetAPIKey();
+        Debug.Log("API 金鑰：" + apiKey);
         if (Microphone.devices.Length == 0)
         {
             Debug.LogError("找不到麥克風");
