@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject homePanel, tutorialPanel, questionPanel, voicePanel;
+    public GameObject homePanel, tutorialPanel, questionPanel, voicePanel, objectPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void ShowHomePanel()
     {
@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
         tutorialPanel.SetActive(false);
         questionPanel.SetActive(false);
         voicePanel.SetActive(false);
+        objectPanel.SetActive(false);
         AppStateManager.CurrentState = AppState.Home;
     }
 
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
         tutorialPanel.SetActive(true);
         questionPanel.SetActive(false);
         voicePanel.SetActive(false);
+        objectPanel.SetActive(false);
         AppStateManager.CurrentState = AppState.Tutorial;
     }
 
@@ -40,6 +42,7 @@ public class UIManager : MonoBehaviour
         tutorialPanel.SetActive(false);
         questionPanel.SetActive(true);
         voicePanel.SetActive(false);
+        objectPanel.SetActive(false);
         AppStateManager.CurrentState = AppState.Questions;
     }
 
@@ -49,6 +52,17 @@ public class UIManager : MonoBehaviour
         tutorialPanel.SetActive(false);
         questionPanel.SetActive(false);
         voicePanel.SetActive(true);
+        objectPanel.SetActive(false);
+        AppStateManager.CurrentState = AppState.Voice;
+    }
+    
+    public void ShowObjectPanel()
+    {
+        homePanel.SetActive(false);
+        tutorialPanel.SetActive(false);
+        questionPanel.SetActive(false);
+        voicePanel.SetActive(false);
+        objectPanel.SetActive(true);
         AppStateManager.CurrentState = AppState.Voice;
     }
 }

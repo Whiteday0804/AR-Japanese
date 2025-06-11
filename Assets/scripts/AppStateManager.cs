@@ -3,7 +3,8 @@ public enum AppState
     Home,
     Tutorial,
     Questions,
-    Voice
+    Voice,
+    ObjectDetector
 }
 
 public static class AppStateManager {

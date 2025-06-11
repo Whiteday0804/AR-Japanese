@@ -75,6 +75,10 @@ public class ARDisplayManager : MonoBehaviour
                     ShowChildIfExists(canvas, "panel_word");
                     questionManager.HideAllEffects();
                     break;
+                case AppState.ObjectDetector:
+                    bgmSource.Pause();
+                    questionManager.HideAllEffects();
+                    break;
 
                 default:
                     // 其他狀態不顯示
